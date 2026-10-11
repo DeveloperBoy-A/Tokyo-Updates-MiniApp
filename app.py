@@ -168,7 +168,8 @@ async def me(authorization: str | None = Header(default=None)):
     result = {"authenticated": True, "user": telegram_user, "premium": False, "points": 0}
     if _db is not None and telegram_user.get("id") is not None:
         saved = _db.users.find_one({"telegram_id": telegram_user["id"]}, {"_id": 0, "premium": 1, "points": 1}) or {}
-        result.update({"premium": bool(saved.get("premium", False)), "points": int(saved.get("points", 0))})
+        premium_until = int(saved.get("premium_until", 0) or 0)
+        result.update({"premium": bool(saved.get("premium", False)) and premium_until > int(time.time()), "premium_until": premium_until, "points": int(saved.get("points", 0))})
     return result
 
 
