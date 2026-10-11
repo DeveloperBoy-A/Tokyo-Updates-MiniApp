@@ -1,0 +1,1 @@
+Create a new MDX blog post at content/blog/best-action-2025.mdx. Use slug best-action-2025 and title "Best Action Movies of 2025". Write short, spoiler-free reviews of five real action movies released in 2025. Include YAML frontmatter with title, date, and excerpt. Return only file content, no markdown fences or explanation.

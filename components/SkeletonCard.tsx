@@ -1,0 +1,1 @@
+export default function SkeletonCard(){return <div className="rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800"><div className="aspect-[2/3] shimmer"/><div className="p-2.5 space-y-2"><div className="h-3 w-full shimmer rounded"/><div className="h-3 w-2/3 shimmer rounded"/></div></div>}
