@@ -1,1 +1,41 @@
-import Link from "next/link";import {ChevronRight} from "lucide-react";import MovieCard from "./MovieCard";export default function MovieRow({title,movies,href,mediaType="movie"}:{title:string;movies:any[];href?:string;mediaType?:"movie"|"tv"}){if(!movies?.length)return null;return <section className="mb-10"><div className="flex items-center justify-between mb-4"><div className="flex items-center gap-3"><span className="w-1 h-6 bg-gradient-to-b from-neon-pink to-neon-purple rounded-full"/><h2 className="text-xl md:text-2xl font-bold">{title}</h2></div>{href&&<Link href={href} className="text-sm text-neutral-400 hover:text-neon-pink flex items-center gap-1">See all <ChevronRight size={16}/></Link>}</div><div className="flex gap-3 overflow-x-auto pb-3">{movies.slice(0,15).map(m=><div key={m.id} className="w-36 md:w-44 shrink-0"><MovieCard movie={m} mediaType={mediaType}/></div>)}</div></section>}
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import MovieCard from "./MovieCard";
+export default function MovieRow({
+  title,
+  movies,
+  href,
+  mediaType = "movie",
+}: {
+  title: string;
+  movies: any[];
+  href?: string;
+  mediaType?: "movie" | "tv";
+}) {
+  if (!movies?.length) return null;
+  return (
+    <section className="mb-10">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <span className="w-1 h-6 bg-gradient-to-b from-neon-pink to-neon-purple rounded-full" />
+          <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
+        </div>
+        {href && (
+          <Link
+            href={href}
+            className="text-sm text-neutral-400 hover:text-neon-pink flex items-center gap-1"
+          >
+            See all <ChevronRight size={16} />
+          </Link>
+        )}
+      </div>
+      <div className="flex gap-3 overflow-x-auto pb-3">
+        {movies.slice(0, 15).map((m) => (
+          <div key={m.id} className="w-36 md:w-44 shrink-0">
+            <MovieCard movie={m} mediaType={mediaType} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

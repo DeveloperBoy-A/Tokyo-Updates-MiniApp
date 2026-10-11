@@ -1,1 +1,51 @@
-const KEY="tokyo_watchlist";export type WatchItem={id:number;title:string;poster_path:string|null;vote_average:number;release_date?:string;first_air_date?:string;mediaType:"movie"|"tv"};export function getWatchlist():WatchItem[]{if(typeof window==="undefined")return[];try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch{return[]}}export function isInWatchlist(id:number,mediaType?:"movie"|"tv"){return getWatchlist().some(m=>m.id===id&&(!mediaType||m.mediaType===mediaType))}export function toggleWatchlist(item:any):WatchItem[]{if(typeof window==="undefined")return[];const list=getWatchlist(),type=item.mediaType||"movie",exists=list.some(m=>m.id===item.id&&m.mediaType===type);const updated:WatchItem[]=exists?list.filter(m=>!(m.id===item.id&&m.mediaType===type)):[...list,{id:item.id,title:item.title||item.name,poster_path:item.poster_path,vote_average:item.vote_average,release_date:item.release_date,first_air_date:item.first_air_date,mediaType:type}];localStorage.setItem(KEY,JSON.stringify(updated));window.dispatchEvent(new Event("watchlist-change"));return updated}export function clearWatchlist(){if(typeof window==="undefined")return;localStorage.removeItem(KEY);window.dispatchEvent(new Event("watchlist-change"))}
+const KEY = "tokyo_watchlist";
+export type WatchItem = {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  vote_average: number;
+  release_date?: string;
+  first_air_date?: string;
+  mediaType: "movie" | "tv";
+};
+export function getWatchlist(): WatchItem[] {
+  if (typeof window === "undefined") return [];
+  try {
+    return JSON.parse(localStorage.getItem(KEY) || "[]");
+  } catch {
+    return [];
+  }
+}
+export function isInWatchlist(id: number, mediaType?: "movie" | "tv") {
+  return getWatchlist().some(
+    (m) => m.id === id && (!mediaType || m.mediaType === mediaType),
+  );
+}
+export function toggleWatchlist(item: any): WatchItem[] {
+  if (typeof window === "undefined") return [];
+  const list = getWatchlist(),
+    type = item.mediaType || "movie",
+    exists = list.some((m) => m.id === item.id && m.mediaType === type);
+  const updated: WatchItem[] = exists
+    ? list.filter((m) => !(m.id === item.id && m.mediaType === type))
+    : [
+        ...list,
+        {
+          id: item.id,
+          title: item.title || item.name,
+          poster_path: item.poster_path,
+          vote_average: item.vote_average,
+          release_date: item.release_date,
+          first_air_date: item.first_air_date,
+          mediaType: type,
+        },
+      ];
+  localStorage.setItem(KEY, JSON.stringify(updated));
+  window.dispatchEvent(new Event("watchlist-change"));
+  return updated;
+}
+export function clearWatchlist() {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(KEY);
+  window.dispatchEvent(new Event("watchlist-change"));
+}

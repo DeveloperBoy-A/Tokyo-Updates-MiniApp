@@ -1,1 +1,19 @@
-"use client";export default function Error({reset}:{error:Error;reset:()=>void}){return <div className="min-h-[60vh] flex flex-col items-center justify-center text-center"><h1 className="text-4xl font-bold text-brand mb-4">Kuch to gadbad hai 😵</h1><p className="text-neutral-400 mb-6">Data load nahi ho paya. Retry kar bhai.</p><button onClick={reset} className="bg-brand px-6 py-2.5 rounded-lg font-semibold">Retry</button></div>}
+"use client";
+export default function Error({ reset }: { error: Error; reset: () => void }) {
+  return (
+    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
+      <h1 className="text-4xl font-bold text-brand mb-4">
+        Kuch to gadbad hai 😵
+      </h1>
+      <p className="text-neutral-400 mb-6">
+        Data load nahi ho paya. Retry kar bhai.
+      </p>
+      <button
+        onClick={reset}
+        className="bg-brand px-6 py-2.5 rounded-lg font-semibold"
+      >
+        Retry
+      </button>
+    </div>
+  );
+}

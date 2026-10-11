@@ -1,1 +1,36 @@
-import "./globals.css";import Navbar from "@/components/Navbar";import Footer from "@/components/Footer";import ScrollToTop from "@/components/ScrollToTop";export const metadata={title:{default:"Tokyo_Updates — Discover Movies, Reviews & Where to Watch",template:"%s | Tokyo_Updates"},description:"Trending movies, top rated films, reviews and legal streaming links. Powered by TMDB.",keywords:["movies","reviews","trending","Tokyo_Updates"],openGraph:{title:"Tokyo_Updates — Movie Discovery",description:"Trending movies, reviews & where to watch legally.",type:"website"}};export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body className="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col antialiased"><Navbar/><main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6">{children}</main><Footer/><ScrollToTop/></body></html>}
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+export const metadata = {
+  title: {
+    default: "Tokyo_Updates — Discover Movies, Reviews & Where to Watch",
+    template: "%s | Tokyo_Updates",
+  },
+  description:
+    "Trending movies, top rated films, reviews and legal streaming links. Powered by TMDB.",
+  keywords: ["movies", "reviews", "trending", "Tokyo_Updates"],
+  openGraph: {
+    title: "Tokyo_Updates — Movie Discovery",
+    description: "Trending movies, reviews & where to watch legally.",
+    type: "website",
+  },
+};
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col antialiased">
+        <Navbar />
+        <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
+          {children}
+        </main>
+        <Footer />
+        <ScrollToTop />
+      </body>
+    </html>
+  );
+}

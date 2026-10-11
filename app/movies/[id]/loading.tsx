@@ -1,1 +1,14 @@
-export default function Loading(){return <div className="space-y-6"><div className="h-[50vh] -mx-4 -mt-6 shimmer rounded-xl"/><div className="flex gap-6 -mt-40"><div className="w-56 h-80 rounded-lg shimmer"/><div className="flex-1 space-y-4"><div className="h-8 w-2/3 shimmer rounded"/><div className="h-24 shimmer rounded"/></div></div></div>}
+export default function Loading() {
+  return (
+    <div className="space-y-6">
+      <div className="h-[50vh] -mx-4 -mt-6 shimmer rounded-xl" />
+      <div className="flex gap-6 -mt-40">
+        <div className="w-56 h-80 rounded-lg shimmer" />
+        <div className="flex-1 space-y-4">
+          <div className="h-8 w-2/3 shimmer rounded" />
+          <div className="h-24 shimmer rounded" />
+        </div>
+      </div>
+    </div>
+  );
+}
