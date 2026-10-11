@@ -1,33 +1,62 @@
-# 🎬 Tokyo_Updates
+# Tokyo_Updates
 
-A legal movie discovery + review blog built with Next.js 14, TMDB API, and MDX.
+Tokyo_Updates is a dark, neon-accented movie discovery website built with Next.js 14 App Router, TypeScript, Tailwind CSS, TMDB, and Supabase. Public movie metadata comes from TMDB. Admin features use Supabase Auth, a server-side email allowlist, database tables, and Storage.
 
-## Features
+## Requirements
 
-- Trending, Popular, Top Rated, Now Playing, and Upcoming movie rows
-- Search, genre, year, and sort filters
-- TV shows and movie detail pages with trailers and legal providers
-- Local-storage watchlist
-- MDX review blog
-- Dark responsive UI with neon styling
-- Loading skeletons, error boundaries, 404, sitemap, robots, OpenGraph
-- Optional GitHub Actions AI content generation
+- Node.js 20 or newer
+- npm 10 or newer
+- A TMDB API key
+- A Supabase project for admin and database-backed features
 
-## Setup
+## Quick start
 
-```bash
-npm install
-cp .env.example .env.local
-# Set TMDB_API_KEY in .env.local
-npm run dev
-```
+1. Install dependencies:
 
-Get a TMDB API key from https://www.themoviedb.org/settings/api.
+   ```bash
+   npm install
+   ```
 
-## Deploy
+2. Copy `.env.example` to `.env.local` and fill in your credentials. Do not commit real keys.
 
-Import this repository on Vercel and add the TMDB_API_KEY environment variable. Optionally set NEXT_PUBLIC_SITE_URL.
+3. Start the development server:
 
-## Legal
+   ```bash
+   npm run dev
+   ```
 
-This site does not host or stream movies. Metadata is supplied by TMDB and viewing links should direct users to official providers. This product uses the TMDB API but is not endorsed or certified by TMDB.
+4. Open [http://localhost:3000](http://localhost:3000).
+
+5. Follow [SETUP.md](./SETUP.md) to create the Supabase schema, configure Storage, and whitelist an admin email.
+
+## Environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site origin |
+| `TMDB_API_KEY` | TMDB API key used on the server |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public/anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only elevated Supabase key; never expose it to client components |
+| `ADMIN_EMAILS` | Comma-separated administrator email allowlist |
+| `NEXT_PUBLIC_ADSENSE_CLIENT` | Optional AdSense publisher client ID |
+
+## Scripts
+
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm run start` — production server
+- `npm run typecheck` — TypeScript validation
+- `npm run lint` — Next.js lint command
+
+## Security notes
+
+- Keep `.env.local` out of version control.
+- Never use the Supabase service-role key in browser code.
+- Configure Row Level Security (RLS) policies before using production data.
+- Only add trusted addresses to `ADMIN_EMAILS` and the `admin_users` table.
+- The website is intended to link to official streaming providers and display movie metadata, not to host copyrighted movies.
+
+## Deployment
+
+Import this repository into Vercel, configure the environment variables in Project Settings, and deploy. Apply the SQL and Storage configuration in [SETUP.md](./SETUP.md) before enabling admin workflows.
