@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a12">
+  <title>Tokyo Updates</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark">東</div>
+      <div class="brand-copy"><strong>Tokyo Updates<span>™</span></strong><small>YOUR ENTERTAINMENT HUB</small></div>
+      <button id="profileBtn" class="avatar" aria-label="Open profile">U</button>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span class="live-dot"></span> TOKYO UNIVERSE</div>
+        <h1>Find your next<br><span>obsession.</span></h1>
+        <p>Explore featured picks, series, movies and more.</p>
+        <a class="hero-cta" href="#discover">Explore collection <span>↗</span></a>
+        <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+      </section>
+      <section id="discover" class="discover-section">
+        <div class="section-heading"><div><span class="eyebrow">CURATED FOR YOU</span><h2>Discover</h2></div><span id="resultCount" class="count-pill">… PICKS</span></div>
+        <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Search titles…" autocomplete="off"><kbd>⌘ K</kbd></label>
+        <div id="categoryFilters" class="filters" aria-label="Filter categories">
+          <button class="filter active" data-category="All">All</button><button class="filter" data-category="Featured">Featured</button><button class="filter" data-category="Movies">Movies</button><button class="filter" data-category="Series">Series</button><button class="filter" data-category="Anime">Anime</button>
+        </div>
+        <div id="catalogGrid" class="catalog-grid"><div class="loading-card">Loading collection…</div></div>
+      </section>
+      <section class="vip-banner"><div><span class="eyebrow">LEVEL UP YOUR EXPERIENCE</span><h3>Tokyo VIP</h3><p>Premium access and exclusive perks.</p></div><span class="vip-gem">✦</span><button id="vipBtn" class="vip-button">Explore VIP ↗</button></section>
+      <section id="profilePanel" class="profile-panel hidden"><div class="section-heading"><div><span class="eyebrow">YOUR SPACE</span><h2>Profile</h2></div><button id="closeProfile" class="close-btn" aria-label="Close profile">×</button></div><div id="profileContent" class="profile-content">Open this app from Telegram to load your profile.</div><div class="referral-box"><strong>Invite your people</strong><p>Share Tokyo Updates with friends.</p><button id="shareBtn" class="secondary-button">Share Mini App ↗</button></div></section>
+    </main>
+    <nav class="bottom-nav"><a class="nav-item active" href="#top"><span>⌂</span>Home</a><a class="nav-item" href="#discover"><span>◈</span>Discover</a><button id="navProfile" class="nav-item"><span>◎</span>Profile</button></nav>
+    <footer>MADE FOR THE TOKYO COMMUNITY <span>✦</span></footer>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
