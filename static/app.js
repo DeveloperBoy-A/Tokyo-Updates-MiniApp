@@ -38,7 +38,18 @@ function openProfile() {
 document.getElementById('profileBtn').addEventListener('click', openProfile);
 document.getElementById('navProfile').addEventListener('click', openProfile);
 document.getElementById('closeProfile').addEventListener('click', () => document.getElementById('profilePanel').classList.add('hidden'));
-document.getElementById('vipBtn').addEventListener('click', () => { if (tg?.showAlert) tg.showAlert('VIP payments are not configured yet. Connect your Telegram Stars payment flow to enable purchases.'); else alert('VIP payments are not configured yet.'); });
+document.getElementById('vipBtn').addEventListener('click', async () => {
+  if (!tg?.initData) { if (tg?.showAlert) tg.showAlert('VIP purchase Telegram ke andar app open karne par available hai.'); else alert('Open this app from Telegram to purchase VIP.'); return; }
+  const button = document.getElementById('vipBtn'); const oldLabel = button.textContent; button.disabled = true; button.textContent = 'Creating invoice…';
+  try {
+    const response = await fetch('/api/vip/invoice', {method:'POST', headers:{...authHeaders(), 'Content-Type':'application/json'}});
+    const data = await response.json();
+    if (!response.ok || !data.invoice_url) throw new Error(data.detail || 'Could not create invoice');
+    if (tg.openInvoice) tg.openInvoice(data.invoice_url, status => { if (status === 'paid') { tg.showAlert('Payment received! VIP activation is being confirmed.'); openProfile(); } else if (status === 'failed') tg.showAlert('Payment failed. Please try again.'); });
+    else window.location.href = data.invoice_url;
+  } catch (error) { if (tg.showAlert) tg.showAlert(error.message || 'VIP invoice could not be created.'); else alert(error.message || 'VIP invoice could not be created.'); }
+  finally { button.disabled = false; button.textContent = oldLabel; }
+});
 document.getElementById('shareBtn').addEventListener('click', () => {
   const botUsername = document.body.dataset.botUsername || '';
   const link = botUsername ? `https://t.me/${botUsername}?startapp=ref_${tg?.initDataUnsafe?.user?.id || ''}` : window.location.href;
