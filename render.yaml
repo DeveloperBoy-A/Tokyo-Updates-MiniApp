@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: tokyo-updates-miniapp
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: BOT_USERNAME
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: WEBAPP_URL
+        sync: false
