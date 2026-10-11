@@ -7,14 +7,14 @@ function errorResponse(error: unknown) {
   const message = error instanceof Error ? error.message : "Request failed.";
   return NextResponse.json({ error: message }, { status: message.startsWith("Unauthorized") ? 401 : 500 });
 }
-function validId(value: string) { return /^[0-9]+$/.test(value) && Number(value) > 0; }
+function validId(value: string) { return /^[a-zA-Z0-9_-]{1,128}$/.test(value); }
 
 export async function GET(_request: NextRequest, context: RouteContext) {
   try {
     await requireAdmin();
     const { id } = await context.params;
     if (!validId(id)) return NextResponse.json({ error: "Invalid movie ID." }, { status: 400 });
-    const { data, error } = await createSupabaseAdminClient().from("movies").select("*").eq("id", Number(id)).maybeSingle();
+    const { data, error } = await createSupabaseAdminClient().from("movies").select("*").eq("id", id).maybeSingle();
     if (error) throw new Error(error.message);
     if (!data) return NextResponse.json({ error: "Movie not found." }, { status: 404 });
     return NextResponse.json({ movie: data });
