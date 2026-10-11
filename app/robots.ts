@@ -1,11 +1,17 @@
 import type { MetadataRoute } from "next";
 
-export default function robots(): MetadataRoute.Robots {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://moviehub.vercel.app";
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://tokyo-updates.vercel.app").replace(/\/$/, "");
 
+export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: base + "/sitemap.xml",
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin", "/api/admin", "/go/"]
+      }
+    ],
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL
   };
 }
