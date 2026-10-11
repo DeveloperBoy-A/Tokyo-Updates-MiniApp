@@ -1,19 +1,20 @@
 "use client";
-export default function Error({ reset }: { error: Error; reset: () => void }) {
+
+import { useEffect } from "react";
+import { AlertTriangle, RotateCcw } from "lucide-react";
+
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  useEffect(() => {
+    console.error("Application route error:", error);
+  }, [error]);
+
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
-      <h1 className="text-4xl font-bold text-brand mb-4">
-        Kuch to gadbad hai 😵
-      </h1>
-      <p className="text-neutral-400 mb-6">
-        Data load nahi ho paya. Retry kar bhai.
-      </p>
-      <button
-        onClick={reset}
-        className="bg-brand px-6 py-2.5 rounded-lg font-semibold"
-      >
-        Retry
-      </button>
-    </div>
+    <section className="mx-auto flex min-h-[55vh] max-w-xl flex-col items-center justify-center text-center">
+      <span className="rounded-full border border-red-500/30 bg-red-500/10 p-4 text-red-300"><AlertTriangle size={28} /></span>
+      <h1 className="mt-5 text-3xl font-bold">Something went wrong</h1>
+      <p className="mt-3 text-neutral-400">The page could not be loaded. Please try again. If the problem continues, come back in a little while.</p>
+      {error.digest ? <p className="mt-2 text-xs text-neutral-600">Error reference: {error.digest}</p> : null}
+      <button onClick={() => reset()} className="mt-6 inline-flex items-center gap-2 rounded-lg bg-neon-pink px-5 py-3 font-bold text-white hover:brightness-110"><RotateCcw size={18} /> Try again</button>
+    </section>
   );
 }
