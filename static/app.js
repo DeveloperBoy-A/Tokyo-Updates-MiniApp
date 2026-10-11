@@ -22,7 +22,7 @@
     {id:'kung-fu-panda',title:'Kung Fu Panda',year:2008,type:'Movies',genres:['Comedy','Action','Animation'],language:['Hindi','English'],quality:['1080p','720p'],rating:'7.6',description:'An unlikely kung fu fan is chosen to fulfil an ancient prophecy and protect his valley.',poster:'https://image.tmdb.org/t/p/w500/wWt4JYXTg5Wr3xBW2phBrMKgp3x.jpg'}
   ];
 
-  const state = { category:'All', genre:'', query:'', page:1, pageSize:9, selected:null };
+  const state = { category:'All', genre:'', query:'', page:1, pageSize:catalog.length, selected:null };
   const $ = id => document.getElementById(id);
   const grid = $('catalogGrid'), count = $('resultCount'), search = $('searchInput');
   let toastTimer;
@@ -46,6 +46,7 @@
     state.page = Math.min(state.page, pages);
     const visible = items.slice((state.page-1)*state.pageSize, state.page*state.pageSize);
     count.textContent = `${items.length} TITLES`;
+    document.querySelector('.pagination').hidden = pages <= 1;
     $('pageInfo').textContent = `PAGE ${state.page} / ${pages}`;
     $('prevPage').disabled = state.page <= 1; $('nextPage').disabled = state.page >= pages;
     if (!visible.length) { grid.innerHTML = '<div class="empty-state">No titles found. Try another title or genre.</div>'; return; }
