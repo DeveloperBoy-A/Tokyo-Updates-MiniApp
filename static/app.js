@@ -50,8 +50,8 @@
     $('prevPage').disabled = state.page <= 1; $('nextPage').disabled = state.page >= pages;
     if (!visible.length) { grid.innerHTML = '<div class="empty-state">No titles found. Try another title or genre.</div>'; return; }
     grid.innerHTML = visible.map(item => `<article class="catalog-card" tabindex="0" role="button" aria-label="View ${esc(item.title)} details" data-open-title="${esc(item.id)}">
-      <div class="poster-wrap"><div class="poster-fallback">${esc(item.title.slice(0,1))}</div><img src="${esc(item.poster)}" alt="${esc(item.title)} poster" loading="lazy" onerror="this.style.display='none'"><span class="poster-badge">${item.featured?'TOKYO PICK':esc(item.type.toUpperCase())}</span><span class="poster-rating">★ ${esc(item.rating)}</span></div>
-      <h3 class="card-title" title="${esc(item.title)}">${esc(item.title)}</h3><div class="card-meta"><span>${esc(item.year)}</span><span>·</span><span>${esc(item.type==='Movies'?'Movie':item.type)}</span></div><div class="card-genre">${esc(item.genres.slice(0,2).join(' · '))}</div>
+      <div class="poster-wrap"><div class="poster-fallback">${esc(item.title.slice(0,1))}</div><img src="${esc(item.poster)}" alt="${esc(item.title)} poster" loading="lazy" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"><span class="poster-badge">${item.featured?'TOKYO PICK':esc(item.type.toUpperCase())}</span><span class="poster-rating">★ ${esc(item.rating)}</span></div>
+      <h3 class="card-title" title="${esc(item.title)}">${esc(item.title)}</h3><div class="card-meta"><span>${esc(item.year)}</span><span>·</span><span>${esc(item.type==='Movies'?'Movie':item.type)}</span></div><div class="card-genre">${esc(item.genres.slice(0,2).join(' · '))}</div><div class="card-language">AUDIO · ${esc(item.language.slice(0,2).join(' / '))}</div>
     </article>`).join('');
   }
   function setCategory(category) {
