@@ -1,0 +1,6 @@
+import type { ReactNode } from "react";
+
+export type AdminColumn<T> = { key: string; label: string; render: (row: T) => ReactNode; align?: "left" | "right" | "center" };
+export default function AdminTable<T extends { id: string | number }>({ columns, rows, emptyLabel = "No records found" }: { columns: AdminColumn<T>[]; rows: T[]; emptyLabel?: string }) {
+  return <div className="overflow-x-auto rounded-xl border border-neutral-800"><table className="w-full min-w-[36rem] divide-y divide-neutral-800 text-left text-sm"><thead className="bg-neutral-900 text-xs uppercase tracking-wide text-neutral-500"><tr>{columns.map((column) => <th key={column.key} scope="col" className={"px-4 py-3 font-semibold " + (column.align === "right" ? "text-right" : column.align === "center" ? "text-center" : "")}>{column.label}</th>)}</tr></thead><tbody className="divide-y divide-neutral-800 bg-neutral-950/40">{rows.length ? rows.map((row) => <tr key={row.id} className="hover:bg-neutral-900/60">{columns.map((column) => <td key={column.key} className={"px-4 py-3 align-middle " + (column.align === "right" ? "text-right" : column.align === "center" ? "text-center" : "")}>{column.render(row)}</td>)}</tr>) : <tr><td colSpan={columns.length} className="px-4 py-12 text-center text-neutral-500">{emptyLabel}</td></tr>}</tbody></table></div>;
+}
